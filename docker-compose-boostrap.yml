@@ -1,0 +1,59 @@
+#
+# MariaDB Galera 10.0
+#
+mariadb-galera-conf:
+  build: galera-conf
+  container_name: mariadb-galera-conf
+  command: "/bin/sh"
+mariadb-galera-data:
+  build: galera-data
+  container_name: mariadb-galera-data
+  command: "/bin/sh"
+mariadb-galera-bootstrap:
+  restart: always
+  image: monami0ya/docker-mariadb-10.0-galera
+  net: host
+  privileged: true
+  volumes_from:
+  - mariadb-galera-data
+  - mariadb-galera-conf
+  container_name: mariadb-galera
+  environment:
+  - "MODE=new"
+  command: "/bin/start"
+#
+# Redis + Sentinel
+#
+redis-data:
+  build: redis-data
+  container_name: redis-data
+redis:
+  restart: always
+  net: host
+  volumes_from:
+  - redis-data
+  container_name: redis
+  image: "redis:3"
+  command: redis-server
+sentinel:
+  restart: always
+  net: host
+  volumes_from:
+  - redis-data
+  container_name: sentinel
+  image: "redis:3"
+  command: "redis-sentinel /data/sentinel.conf"
+#
+# MongoDB 2.6.5
+#
+mongo-data:
+  build: mongo-data
+  container_name: mongo-data
+mongo:
+  restart: always
+  net: host
+  volumes_from:
+  - mongo-data
+  image: "mongo:2.6.5"
+  container_name: mongo
+  command: "--smallfiles --keyFile /data/db/mongodb-keyfile --replSet rs0"

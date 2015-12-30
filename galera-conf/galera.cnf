@@ -1,0 +1,23 @@
+default-character-set = utf8
+skip-character-set-client-handshake
+character-set-server = utf8
+collation-server = utf8_general_ci
+init-connect = SET NAMES utf8
+
+[client]
+default-character-set = utf8
+
+[mysqldump]
+default-character-set = utf8
+
+[mysql]
+default-character-set = utf8
+
+[mysqld]
+binlog_format         = ROW
+bind_address          = 0.0.0.0
+[mariadb]
+wsrep_provider        = '/usr/lib/galera/libgalera_smm.so'
+wsrep_cluster_address = gcomm://10.0.0.4,10.0.0.5,10.0.0.6
+wsrep_node_address    = 10.0.0.5
+wsrep_on              = ON
