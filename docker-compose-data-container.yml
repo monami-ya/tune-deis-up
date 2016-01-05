@@ -1,0 +1,21 @@
+#
+# MariaDB Galera 10.0
+#
+mariadb-galera-conf:
+  build: galera-conf
+  container_name: deisNode0:5500/mariadb-galera-conf
+mariadb-galera-data:
+  build: galera-data
+  container_name: deisNode0:5500/mariadb-galera-data
+#
+# Redis + Sentinel
+#
+redis-data:
+  build: redis-data
+  container_name: deisNode0:5500/redis-data
+#
+# MongoDB 2.6.5
+#
+mongo-data:
+  build: mongo-data
+  container_name: deisNode0:5500/mongo-data
