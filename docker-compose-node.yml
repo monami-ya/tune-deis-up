@@ -19,7 +19,7 @@ mariadb-galera:
   - mariadb-galera-data
   container_name: mariadb-galera
   environment:
-  - MODE=new
+  - MODE=node
 #
 # Redis + Sentinel
 #
