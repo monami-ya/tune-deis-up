@@ -11,6 +11,7 @@ RUN apt-get update && \
     apt-get autoremove -y openssl && \
     apt-get clean
 
+VOLUME [ "/data/db" ]
 ENTRYPOINT [ "sleep" ]
 CMD [ "infinity" ]
 
